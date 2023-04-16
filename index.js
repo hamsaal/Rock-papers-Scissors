@@ -6,7 +6,7 @@ let getUserChoice = () => {
         userChoice = temp.toLowerCase();
     }
     while (userChoice !== 'rock' && userChoice !== 'paper' && userChoice !== 'scissors');
-    return userChoice
+    return userChoice;
 }
 // Create a function , which gets a  random choice out of the three pre-defined choices of the game and assigns them to our computer
 
@@ -15,38 +15,47 @@ const getComputerChoice = () => {
     const random = Math.floor(Math.random() * 3);
     return choices[random];
 }
-
+// Create a function, which will compare the user's choice with the computer's choice and show the results to use
 let playRound = (playerChoice, computerChoice) => {
     let win = "You win!";
     let defeat = "You Lose!"
-    switch (computerChoice) {
+    const myChoice = playerChoice();
+    const cpuChoice = computerChoice();
+    switch (cpuChoice) {
         case 'rock':
-            switch (playerChoice) {
+            switch (myChoice) {
                 case 'scissors':
-                    return `${defeat}, ${computerChoice} beats ${playerChoice}`
+                    return `${defeat}, ${cpuChoice} beats ${myChoice}`
                     break;
                 case 'paper':
-                    return `${win}, ${playerChoice} beats ${computerChoice}`
+                    return `${win}, ${myChoice} beats ${cpuChoice}`
 
             }
             break;
         case 'paper':
-            switch (playerChoice) {
+            switch (myChoice) {
                 case 'rock':
-                    return `${defeat}, ${computerChoice} beats ${playerChoice}`;
+                    return `${defeat}, ${cpuChoice} beats ${myChoice}`;
                     break;
                 case 'scissors':
-                    return `${win}, ${playerChoice} beats ${computerChoice}`;
+                    return `${win}, ${myChoice} beats ${cpuChoice}`;
             }
             break;
         case 'scissors':
-            switch (playerChoice) {
+            switch (myChoice) {
                 case 'rock':
-                    return `${win}, ${playerChoice} beats ${computerChoice}`;
+                    return `${win}, ${myChoice} beats ${cpuChoice}`;
                     break;
                 case 'paper':
-                    return `${defeat}, ${computerChoice} beats ${playerChoice}`;
+                    return `${defeat}, ${cpuChoice} beats ${myChoice}`;
             }
             break;
     }
 }
+const game = () => {
+    for (let i = 0; i < 5; i++) {
+        console.log((playRound(getUserChoice, getComputerChoice)));
+    }
+
+}
+game();
