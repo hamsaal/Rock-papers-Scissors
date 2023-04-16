@@ -29,7 +29,7 @@ let playRound = (playerChoice, computerChoice) => {
     const myChoice = playerChoice();
     const cpuChoice = computerChoice();
     if (checkTie(myChoice, cpuChoice)) {
-        console.log(`Nobody won try again`);
+        return `Nobody won try again`;
     }
     else {
         switch (cpuChoice) {
