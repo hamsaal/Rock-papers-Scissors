@@ -1,8 +1,10 @@
-// Important Global variables
+// Important Global variables and HTML elements and important query selectors
 const bd = document.querySelector("body");
-const div = document.createElement('div');
+const buttons = document.querySelectorAll("button");
+const Resultdiv = document.createElement('div');
 bd.appendChild(div);
 let playerWins, cpuWins;
+let TotalGamesPlayed;
 
 // Create a function , which gets a  random choice out of the three pre-defined choices of the game and assigns them to our compute
 const getComputerChoice = () => {
@@ -17,14 +19,7 @@ function checkTie(a, b) {
     }
 }
 
-// Create a function, which will compare the user's choice with the computer's choice and show the results to use
-
-
-
-// Add event Listeners to the buttons and using the classList try to name your buttons 
-// Creating a divison that can actually store the results and display them on the webpage
-
-function gamesCounter(counter) {
+function gamesCounterCheck(counter) {
     if (counter < 5) {
         div.innerText = `${counter} `;
     }
@@ -32,16 +27,21 @@ function gamesCounter(counter) {
         div.innerText = `GameOver`;
     }
 }
-const buttons = document.querySelectorAll("button");
+
+// Add event Listeners to the buttons and using the classList try to name your buttons 
+
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const playerSelection = button.classList.value;
         playRound(playerSelection, getComputerChoice);
 
 
+
     }
     )
 })
+// Create a function, which will compare the user's choice with the computer's choice and show the results to use
+
 let playRound = (myChoice, computerChoice) => {
 
     let win = "You win!";
@@ -49,6 +49,8 @@ let playRound = (myChoice, computerChoice) => {
     const cpuChoice = computerChoice();
     if (checkTie(myChoice, cpuChoice)) {
         div.innerText = `It is a tie`
+        ++TotalGamesPlayed;
+        gamesCounterCheck(TotalGamesPlayed);
     }
     else {
         switch (cpuChoice) {
@@ -56,9 +58,13 @@ let playRound = (myChoice, computerChoice) => {
                 switch (myChoice) {
                     case 'scissors':
                         div.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
+                        ++TotalGamesPlayed;
+                        gamesCounterCheck(TotalGamesPlayed);
                         break;
                     case 'paper':
                         div.innerText = `${myChoice} beats ${cpuChoice}`
+                        ++TotalGamesPlayed;
+                        gamesCounterCheck(TotalGamesPlayed);
 
                 }
                 break;
@@ -66,9 +72,13 @@ let playRound = (myChoice, computerChoice) => {
                 switch (myChoice) {
                     case 'rock':
                         div.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
+                        ++TotalGamesPlayed;
+                        gamesCounterCheck(TotalGamesPlayed);
                         break;
                     case 'scissors':
                         div.innerText = `${myChoice} beats ${cpuChoice}`
+                        ++TotalGamesPlayed;
+                        gamesCounterCheck(TotalGamesPlayed);
 
                 }
                 break;
@@ -76,10 +86,14 @@ let playRound = (myChoice, computerChoice) => {
                 switch (myChoice) {
                     case 'rock':
                         div.innerText = `${myChoice} beats ${cpuChoice}`
+                        ++TotalGamesPlayed;
+                        gamesCounterCheck(TotalGamesPlayed);
 
                         break;
                     case 'paper':
                         div.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
+                        ++TotalGamesPlayed;
+                        gamesCounterCheck(TotalGamesPlayed);
                 }
                 break;
         }
