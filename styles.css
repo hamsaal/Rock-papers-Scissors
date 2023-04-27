@@ -1,7 +1,10 @@
 body {
+    height: 100vh;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 
 }
 
@@ -30,10 +33,16 @@ body {
 
 .middle-container {
     background-color: rgb(79, 69, 87);
+    padding: 4rem;
+    flex: 1;
+
 }
 
 .game-container {
     display: flex;
+    justify-content: space-between;
+
+
 }
 
 .player-selection {
@@ -47,7 +56,7 @@ body {
 }
 
 button {
-    block-size: 300px;
-    inline-size: 300px;
+    block-size: 100px;
+    inline-size: 100px;
 
 }
