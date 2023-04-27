@@ -1,10 +1,14 @@
 // Important Global variables and HTML elements and important query selectors
 const bd = document.querySelector("body");
 const buttons = document.querySelectorAll("button");
-const Resultdiv = document.createElement('div');
-bd.appendChild(div);
+const roundResultDiv = document.createElement('div');
+const gamesCounterDiv = document.createElement('div');
+const finalResultDiv = document.createElement('div');
+bd.appendChild(roundResultDiv);
+bd.appendChild(gamesCounterDiv);
+bd.appendChild(finalResultDiv);
 let playerWins, cpuWins;
-let TotalGamesPlayed;
+let TotalGamesPlayed = 0;
 
 // Create a function , which gets a  random choice out of the three pre-defined choices of the game and assigns them to our compute
 const getComputerChoice = () => {
@@ -18,13 +22,32 @@ function checkTie(a, b) {
         return true;
     }
 }
+const increasePlayerWins = () => {
+    ++playerWins;
+}
+const increaseCpuWins = () => {
+    ++cpuWins;
+}
+const announceWinner = (playerWins, computerWins) => {
+    roundResultDiv.innerText = ``;
+    if (playerWins > computerWins) {
+        finalResultDiv.innerText = `You saved the Earth by winning against AI`;
+    }
+    else if (playerWins < computerWins) {
+        finalResultDiv.innerText = `AI took over, you lost`;
+    }
+    else {
+        finalResultDiv.innerText = `It is a Tie, You both are tuff!!!`
+    }
+}
+
 
 function gamesCounterCheck(counter) {
     if (counter < 5) {
-        div.innerText = `${counter} `;
+        gamesCounterDiv.innerText = `${counter} `;
     }
     else {
-        div.innerText = `GameOver`;
+        gamesCounterDiv.innerText = `GameOver`;
     }
 }
 
@@ -33,22 +56,25 @@ function gamesCounterCheck(counter) {
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const playerSelection = button.classList.value;
-        playRound(playerSelection, getComputerChoice);
+        playRound(playerSelection, getComputerChoice, increasePlayerWins, increaseCpuWins);
 
-
+        if (TotalGamesPlayed === 5) {
+            announceWinner(playerWins, cpuWins);
+        }
 
     }
     )
 })
 // Create a function, which will compare the user's choice with the computer's choice and show the results to use
 
-let playRound = (myChoice, computerChoice) => {
+let playRound = (myChoice, computerChoice, function1, function2) => {
 
-    let win = "You win!";
-    let defeat = "You Lose!"
+    let win = "You won this round!";
+    let defeat = "You Lost this round!";
+    let winner;
     const cpuChoice = computerChoice();
     if (checkTie(myChoice, cpuChoice)) {
-        div.innerText = `It is a tie`
+        roundResultDiv.innerText = `It is a tie`
         ++TotalGamesPlayed;
         gamesCounterCheck(TotalGamesPlayed);
     }
@@ -57,45 +83,51 @@ let playRound = (myChoice, computerChoice) => {
             case 'rock':
                 switch (myChoice) {
                     case 'scissors':
-                        div.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
-                        ++TotalGamesPlayed;
-                        gamesCounterCheck(TotalGamesPlayed);
+                        roundResultDiv.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
+                        winner = `Player`;
+
+
                         break;
                     case 'paper':
-                        div.innerText = `${myChoice} beats ${cpuChoice}`
-                        ++TotalGamesPlayed;
-                        gamesCounterCheck(TotalGamesPlayed);
+                        roundResultDiv.innerText = `${win}, ${myChoice} beats ${cpuChoice}`
+                        winner = `Computer`;
+
 
                 }
                 break;
             case 'paper':
                 switch (myChoice) {
                     case 'rock':
-                        div.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
-                        ++TotalGamesPlayed;
-                        gamesCounterCheck(TotalGamesPlayed);
+                        roundResultDiv.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
+                        winner = `Computer`;
+
+
                         break;
                     case 'scissors':
-                        div.innerText = `${myChoice} beats ${cpuChoice}`
-                        ++TotalGamesPlayed;
-                        gamesCounterCheck(TotalGamesPlayed);
+                        roundResultDiv.innerText = `${win}, ${myChoice} beats ${cpuChoice}`;
+                        winner = `Player`;
+
 
                 }
                 break;
             case 'scissors':
                 switch (myChoice) {
                     case 'rock':
-                        div.innerText = `${myChoice} beats ${cpuChoice}`
-                        ++TotalGamesPlayed;
-                        gamesCounterCheck(TotalGamesPlayed);
+                        roundResultDiv.innerText = `${win}, ${myChoice} beats ${cpuChoice}`
+                        winner = `Player`;
+
 
                         break;
                     case 'paper':
-                        div.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
-                        ++TotalGamesPlayed;
-                        gamesCounterCheck(TotalGamesPlayed);
+                        roundResultDiv.innerText = `${defeat}, ${cpuChoice} beats ${myChoice}`
+                        winner = `Computer`;
+
+
                 }
                 break;
         }
+        ++TotalGamesPlayed;
+        gamesCounterCheck(TotalGamesPlayed);
+        (winner === 'Player') ? function1() : function2();
     }
 }
