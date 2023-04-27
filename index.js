@@ -24,7 +24,7 @@ function checkTie(a, b) {
 }
 
 
-// Create function such that the number of playerWins increase everytime the player wins
+// Create function such that the number of playerWins increase every time the player wins
 const increasePlayerWins = () => {
     ++playerWins;
 }
