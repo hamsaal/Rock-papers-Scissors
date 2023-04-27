@@ -22,12 +22,19 @@ function checkTie(a, b) {
         return true;
     }
 }
+
+
+// Create function such that the number of playerWins increase everytime the player wins
 const increasePlayerWins = () => {
     ++playerWins;
 }
+
+// Create function such that number of Computer wins increase every time the Cpu wins
 const increaseCpuWins = () => {
     ++cpuWins;
 }
+
+// Create function such that the winner is announced after the game finishes
 const announceWinner = (playerWins, computerWins) => {
     roundResultDiv.innerText = ``;
     if (playerWins > computerWins) {
@@ -40,7 +47,7 @@ const announceWinner = (playerWins, computerWins) => {
         finalResultDiv.innerText = `It is a Tie, You both are tuff!!!`
     }
 }
-// Define the refreshGame function
+// Define the refreshGame function , such that it removes the event listners after the game is finsihed
 const refreshGame = () => {
     buttons.forEach(button => {
         button.removeEventListener("click", handleButtonClick);
@@ -48,7 +55,7 @@ const refreshGame = () => {
 };
 
 
-
+// function to check how many games have been played so far
 function gamesCounterCheck(counter) {
     if (counter < 5) {
         gamesCounterDiv.innerText = `${counter} `;
