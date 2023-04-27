@@ -40,6 +40,13 @@ const announceWinner = (playerWins, computerWins) => {
         finalResultDiv.innerText = `It is a Tie, You both are tuff!!!`
     }
 }
+// Define the refreshGame function
+const refreshGame = () => {
+    buttons.forEach(button => {
+        button.removeEventListener("click", handleButtonClick);
+    });
+};
+
 
 
 function gamesCounterCheck(counter) {
@@ -52,19 +59,25 @@ function gamesCounterCheck(counter) {
 }
 
 // Add event Listeners to the buttons and using the classList try to name your buttons 
+// Define the event listener function
+const handleButtonClick = (event) => {
+    const button = event.target;
+    const playerSelection = button.classList.value;
+    playRound(playerSelection, getComputerChoice, increasePlayerWins, increaseCpuWins);
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const playerSelection = button.classList.value;
-        playRound(playerSelection, getComputerChoice, increasePlayerWins, increaseCpuWins);
-
-        if (TotalGamesPlayed === 5) {
-            announceWinner(playerWins, cpuWins);
-        }
-
+    if (TotalGamesPlayed === 5) {
+        announceWinner(playerWins, cpuWins);
+        refreshGame();
     }
-    )
-})
+};
+
+// Add the event listeners
+buttons.forEach(button => {
+    button.addEventListener('click', handleButtonClick);
+});
+
+
+
 // Create a function, which will compare the user's choice with the computer's choice and show the results to use
 
 let playRound = (myChoice, computerChoice, function1, function2) => {
