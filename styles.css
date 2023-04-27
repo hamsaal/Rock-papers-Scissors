@@ -10,7 +10,25 @@ body {
 *::after {
     box-sizing: inherit;
     text-decoration: none;
+}
 
 
 
+.nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    font-family: 'Sigmar', cursive;
+    font-size: 8em;
+    background-color: rgb(244, 238, 224);
+}
+
+.nav-content {
+    margin-top: 1rem;
+    ;
+}
+
+.game-container {
+    background-color: rgb(79, 69, 87);
 }
