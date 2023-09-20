@@ -1,16 +1,22 @@
 // Important Global variables and HTML elements and important query selectors
 const bd = document.querySelector("body");
+const scoreContainer = document.querySelector(".score-container")
 let buttons = document.querySelectorAll(".buttons");
 const buttonsArray = Array.from(buttons);
-console.log(buttonsArray);
-const roundResultDiv = document.createElement('div');
-const gamesCounterDiv = document.createElement('div');
-const finalResultDiv = document.createElement('div');
-bd.appendChild(roundResultDiv);
-bd.appendChild(gamesCounterDiv);
-bd.appendChild(finalResultDiv);
+const computerSelectionBox = document.querySelector(".computer-selection");
+const resultsContainer = document.createElement('div');
+const resultsContent = document.createElement('p');
+
+scoreContainer.appendChild(resultsContainer);
+resultsContainer.appendChild(resultsContent);
+
+// resultsContainer.textContent = "Hello world"
+
+
 let playerWins, cpuWins;
 let TotalGamesPlayed = 0;
+
+
 
 // Create a function , which gets a  random choice out of the three pre-defined choices of the game and assigns them to our compute
 const getComputerChoice = () => {
@@ -50,11 +56,11 @@ const increaseCpuWins = () => {
 //     }
 // }
 // Define the refreshGame function , such that it removes the event listners after the game is finsihed
-// const refreshGame = () => {
-//     buttons.forEach(button => {
-//         button.removeEventListener("click", handleButtonClick);
-//     });
-// };
+const refreshGame = () => {
+    buttons.forEach(button => {
+        button.removeEventListener("click", handleButtonClick);
+    });
+};
 
 
 // function to check how many games have been played so far
@@ -71,12 +77,10 @@ function gamesCounterCheck(counter) {
 // Define the event listener function
 const handleButtonClick = (event) => {
     const playerSelection = event.target.className;
-    console.log(playerSelection);
 
-    const computerSelection = getComputerChoice();
-    console.log(computerSelection);
 
-    // playRound(playerSelection, getComputerChoice, increasePlayerWins, increaseCpuWins);
+
+    playRound(playerSelection, getComputerChoice, increasePlayerWins, increaseCpuWins);
 
     if (TotalGamesPlayed === 5) {
         announceWinner(playerWins, cpuWins);
@@ -94,12 +98,8 @@ buttons.forEach(button => {
 // Create a function, which will compare the user's choice with the computer's choice and show the results to use
 
 let playRound = (playerChoice, computerChoice, function1, function2) => {
-
-    let win = "You won this round!";
-    let defeat = "You Lost this round!";
-    let winner;
-    const cpuChoice = computerChoice();
-    if (checkTie(playerChoice, cpuChoice)) {
+    const cpuSelection = computerChoice();
+    if (checkTie(playerChoice, cpuSelection)) {
         roundResultDiv.innerText = `It is a tie`
         ++TotalGamesPlayed;
         gamesCounterCheck(TotalGamesPlayed);
