@@ -41,22 +41,51 @@ body {
 .game-container {
     display: flex;
     justify-content: space-between;
-
-
+    margin: 2rem;
+    padding: 4rem;
 }
 
-.player-selection {
+.score-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    inline-size: 500px;
+    block-size: 300px;
 }
 
+.score-card {
+    display: flex;
+    justify-content: space-between;
+}
+
+p {
+    text-align: center;
+}
+
+.player-selection,
 .computer-selection {
     display: flex;
     flex-direction: column;
+    gap: 30px;
+
 }
 
-button {
-    block-size: 100px;
+img {
+    block-size: auto;
     inline-size: 100px;
+}
 
+.player-selection img:hover {
+    border-color: aliceblue;
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
+}
+
+.computer-selection img {
+    cursor: not-allowed;
+}
+
+.player-selection div,
+.computer-selection div {
+    border: solid;
 }
