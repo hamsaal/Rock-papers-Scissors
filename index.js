@@ -14,7 +14,9 @@ resultsContainer.appendChild(finalResults);
 
 // Accessing the span element which displays the current number of game 
 let gameNumber = document.querySelector(".current-game-num");
+console.log(gameNumber);
 let gameNumberContainer = document.querySelector(".game-number-container");
+console.log(gameNumberContainer);
 
 // Accessing variables to increase the per round score
 let playerScore = document.querySelector(".player-score");
@@ -77,7 +79,8 @@ const refreshGame = () => {
 
 // function to check how many games have been played so far
 function gamesCounterCheck(counter) {
-    if (counter <= 5) {
+
+    if (counter < 5) {
         gameNumber.innerText = `${counter} `;
     }
     else {
@@ -88,6 +91,7 @@ function gamesCounterCheck(counter) {
 // Add event Listeners to the buttons and using the classList try to name your buttons 
 // Define the event listener function
 const handleButtonClick = (event) => {
+
     const playerSelection = event.target.className;
 
 
@@ -111,9 +115,10 @@ buttons.forEach(button => {
 
 let playRound = (playerChoice, computerChoice, function1, function2) => {
     const cpuChoice = computerChoice();
+    if (checkTie(playerChoice, cpuChoice)) {
+        return;
+    }
 
-
-    gamesCounterCheck(TotalGamesPlayed);
 
     let winner = ``;
     switch (cpuChoice) {
