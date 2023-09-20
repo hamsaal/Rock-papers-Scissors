@@ -48,15 +48,17 @@ body {
 .score-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
     gap: 40px;
     inline-size: 500px;
     block-size: 300px;
 }
 
 .score-card {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 40px;
 }
 
 p {
